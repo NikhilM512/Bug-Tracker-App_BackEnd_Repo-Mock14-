@@ -65,7 +65,7 @@ app.post("/login",jsonParser,async(req,res)=>{
                     const token=jwt.sign({"userID":isUserRegisrered[0]._id},process.env.KEY)
                     res.send({"message":"Log In Successfull","Token":token})
                 }else{
-                    res.send("Log-In Failed. Please Enter Correct Password")
+                    res.send({err,"msg":"Log-In Failed. Please Enter Correct Password"})
                 }
             })
         }else{
