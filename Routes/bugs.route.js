@@ -4,10 +4,15 @@ const bugsRouter=express.Router();
 const {BugsModel}=require("../Model/Bugs.model")
 
 bugsRouter.get("/",async(req,res)=>{
-    console.log(req)
-    // res.send("Hiii")
-    const bugs = await BugsModel.find()
-    res.send(bugs)
+    console.log(req.body.userID)
+    let ID=req.body.userID;
+    try {
+        const bugs = await BugsModel.find({userID:ID})
+    res.send({data:bugs,msg:"Bugs Found..!Hurray"})
+    } catch (error) {
+        console.log(error)
+        res.send({"msg":"Unable to fetch"})
+    }
 });
 
 bugsRouter.post("/report",async(req,res)=>{
